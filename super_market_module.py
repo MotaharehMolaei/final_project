@@ -1,27 +1,32 @@
 import re
 from datetime import datetime
 
-def name_validator(name):
-    if not re.match(r"^[a-zA-Z\s]{3,30}$", name):
-        raise NameError("Invalid name!")
+class Product:
+    def __init__(self, name, brand, quantity, price, expire_date):
+        self.name = name
+        self.brand = brand
+        self.quantity = quantity
+        self.price = price
+        self.expire_date = expire_date
 
-def brand_validator(brand):
-    if not re.match(r"^[a-zA-Z\s]{3,30}$", brand):
-        raise NameError("Invalid brand!")
+    def validation(self):
+        if not re.match(r"^[a-zA-Z\s]{3,30}$", self.name):
+            raise NameError("Invalid name!")
 
-def quantity_validator(quantity):
-    if not (type(quantity) == int and quantity > 0):
-        raise NameError("Invalid quantity!")
+        if not re.match(r"^[a-zA-Z\s]{3,30}$", self.brand):
+            raise NameError("Invalid brand!")
 
-def price_validator(price):
-    if not (type(price) == float and price > 0):
-        raise NameError("Invalid price!")
+        if not (type(self.quantity) == int and self.quantity > 0):
+            raise NameError("Invalid quantity!")
 
-def expiration_date_validator(expire_date):
-    if not expire_date >= datetime.today().date():
-        raise NameError("Invalid expiration date!")
+        if not (type(self.price) == float and self.price > 0):
+            raise NameError("Invalid price!")
 
+        if not self.expire_date >= datetime.today().date():
+             raise NameError("Invalid expiration date!")
 
+    def save(self):
+        print("Saving product...", self.name, self.brand, self.quantity, self.price, self.expire_date)
 
 
 def create_product_and_validate(id, name, brand,quantity, price, expiration_date):
