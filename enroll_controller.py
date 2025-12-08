@@ -3,35 +3,35 @@ from enroll_model import Enroll
 from enroll_dao import EnrollDataAccess
 
 
-class EnrollController(Enroll):
+class EnrollController:
     @staticmethod
-    def is_valid_enroll(self):
-        if not re.match(r"^[a-zA-Z\s]{3,30}$", self.name ):
+    def is_valid_enroll(name, family, phone_number, enroll_date, level, teacher):
+        if not re.match(r"^[a-zA-Z\s]{3,30}$", name):
             raise NameError("Invalid Name")
 
-        if not re.match(r"^[a-zA-Z\s]{3,30}$", self.family):
+        if not re.match(r"^[a-zA-Z\s]{3,30}$", family):
             raise NameError("Invalid family name")
 
-        if not re.match(r"^09\d{9}$", self.phone_number):
+        if not re.match(r"^09\d{9}$", phone_number):
             raise NameError("Invalid phone number")
 
-        if not re.match(r"^\d{4}-\d{2}-d\{2}$", self.enroll_date):
+        if not re.match(r"^\d{4}-\d{2}-d\{2}$", enroll_date):
             raise NameError("Invalid enroll date")
 
-        if self.level not in ["A1", "A2", "B1", "B2", "C1", "C2"]:
+        if level not in ["A1", "A2", "B1", "B2", "C1", "C2"]:
             raise NameError("Invalid level")
 
-        if not re.match(r"^[a-zA-Z\s]{3,60}$", self.Teacher):
+        if not re.match(r"^[a-zA-Z\s]{3,60}$", teacher):
             raise NameError("Invalid Teacher name")
 
     @staticmethod
     def save(id, name, family, phone_number, enroll_date, class_name, level, teacher):
-        valid, message = EnrollController.is_valid_enroll(self.name, self.family, self.phone_number, self.enroll_date, self.level, self.teacher)
+        valid, message = EnrollController.is_valid_enroll(name, family, phone_number, enroll_date, class_name, level,teacher)
         if not valid:
             return valid, message
 
         try:
-            enroll = Enroll(id, name, family, phone_number, enroll_date, class_name, level, teacher)
+            enroll = Enroll(self)
             dao = EnrollDataAccess()
             dao.save(enroll)
             return True, "Enrollment saved successfully"
@@ -40,8 +40,8 @@ class EnrollController(Enroll):
 
     @staticmethod
     def edit(id, name, family, phone_number, enroll_date, class_name, level, teacher):
-        valid, message = EnrollController.is_valid_enroll(self.name, self.family, self.phone_number, self.enroll_date,
-                                                          self.level, self.teacher)
+        valid, message = EnrollController.is_valid_enroll(name, family, phone_number, enroll_date, class_name,
+                                                          level, teacher)
         if not valid:
             return valid, message
 
