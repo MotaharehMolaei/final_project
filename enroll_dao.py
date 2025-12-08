@@ -22,6 +22,11 @@ class EnrollDataAccess:
                            )
             connection.commit()
 
+    def remove(self, id):
+        with sqlite3.connect("enroll_db.sqlite3") as connection:
+            cursor = connection.cursor()
+            cursor.execute("delete from enrollments where id=?", [id])
+            connection.commit()
 
     def find_all(self):
         with sqlite3.connect("enroll_db.sqlite3") as connection:

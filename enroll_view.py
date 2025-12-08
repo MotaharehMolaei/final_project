@@ -1,16 +1,93 @@
 from tkinter import *
 from tkinter import ttk
+from enroll_controller import EnrollController
+from tkinter import messagebox
 
 
+def reset():
+    id.set(0)
+    name.set("")
+    family.set("")
+    phone_number.set("")
+    class_name.set("")
+    level.set("")
+    teacher.set("")
+
+    status, enroll_list = EnrollController.find_all()
+
+    for item in table.get_children():
+        table.delete(item)
+
+    if status:
+        for enroll in enroll_list:
+            table.insert("", END, values=enroll)
+    else:
+        messagebox.showerror("Error", "No enroll found")
 
 
-#----------------Window------------------
+def select_enroll(event):
+    enroll = table.item(table.focus())["values"]
+    id.set(enroll[0])
+    name.set(enroll[1])
+    family.set(enroll[2])
+    phone_number.set(enroll[3])
+    class_name.set(enroll[4])
+    enroll_date.set(enroll[5])
+    level.set(enroll[6])
+    teacher.set(enroll[7])
+
+#----------------------------------------------------------
+def save_click():
+    status, message = EnrollController.save(
+        id.get(),
+        name.get(),
+        family.get(),
+        phone_number.get(),
+        class_name.get(),
+        enroll_date.get(),
+        level.get(),
+        teacher.get()
+    )
+    if status:
+        reset()
+        messagebox.showinfo("Save", "Enrollment saved successfully")
+    else:
+        messagebox.showerror("Error", message)
+
+
+def edit_click():
+    status, message = EnrollController.edit(
+        id.get(),
+        name.get(),
+        family.get(),
+        enroll_date.get(),
+        phone_number.get(),
+        class_name.get(),
+        level.get(),
+        teacher.get()
+    )
+    if status:
+        reset()
+        messagebox.showinfo("Edit Success", "Enrollment edited successfully")
+    else:
+        messagebox.showerror("Edit Error", message)
+
+def remove_click():
+    status, message = EnrollController.remove(id.get())
+    if status:
+        reset()
+        messagebox.showinfo("Remove Success", "Enrollment removed successfully")
+    else:
+        messagebox.showerror("Remove Error", message)
+
+
+# region window GUI
 window = Tk()
 window.geometry("1200x450")
 window.title("Enroll View")
 window.title("Enrollment Management")
 
-#Labels
+#region labels
 Label(window, text="ID").place(x=20, y=20)
 Label(window, text="Name").place(x=20, y=60)
 Label(window, text="family").place(x=20, y=100)
@@ -19,18 +96,20 @@ Label(window, text="Enroll Date").place(x=20, y=180)
 Label(window, text="Class").place(x=20, y=220)
 Label(window, text="Level").place(x=20, y=260)
 Label(window, text="Teacher").place(x=20, y=300)
+#endregion
 
-#Variables
+# region Variables
 id = IntVar()
 name = StringVar()
 family = StringVar()
 phone_number = StringVar()
 enroll_date = StringVar()
 class_name = StringVar()
-Level = StringVar()
+level = StringVar()
 teacher = StringVar()
+# endregion
 
-#Entries
+# region Entries
 Entry(window, textvariable=id).place(x=130, y=20)
 Entry(window, textvariable=name).place(x=130, y=60)
 Entry(window, textvariable=family).place(x=130, y=100)
@@ -40,17 +119,19 @@ Entry(window, textvariable=enroll_date).place(x=130, y=180)
 class_box = ttk.Combobox(window, textvariable=class_name, values=("English", "German", "Korean", "French", "Italian", "Chinese"))
 class_box.place(x=130, y=220)
 
-class_box = ttk.Combobox(window, textvariable=class_name, values=("A1", "A2", "B1", "B2", "C1", "C2"))
+class_box = ttk.Combobox(window, textvariable=level, values=("A1", "A2", "B1", "B2", "C1", "C2"))
 class_box.place(x=130, y=260)
 
 Entry(window, textvariable=teacher).place(x=130, y=300)
+# endregion
 
-#Buttons
+# region Buttons
 Button(window, text="Save", width=18).place(x=50, y=350)
 Button(window, text="Edit", width=18).place(x=50, y=380)
 Button(window, text="Remove", width=18).place(x=50, y=410)
+# endregion
 
-#Table
+# region  Create Table
 table = ttk.Treeview(window, height=21, columns=["ID", "Name", "Family", "Phone Number", "Enroll Date", "Class", "Level", "Teacher"], show="headings")
 
 table.column("ID", width=50)
@@ -72,4 +153,9 @@ table.heading("Level", text="Level")
 table.heading("Teacher", text="Teacher")
 
 table.place(x=350, y=20)
+table.bind("<<TreeviewSelect>>", select_enroll)
+# endregion
+
+reset()
 window.mainloop()
+# endregion
