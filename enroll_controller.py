@@ -24,7 +24,7 @@ class EnrollController:
         except ValueError:
             return False, "Invalid Enroll Date (YYYY-MM-DD)"
 
-            # Validate date is today or in the future
+
         today = datetime.now().date()
         if date_obj.date() < today:
             return False, "Enroll Date cannot be in the past"
@@ -41,9 +41,7 @@ class EnrollController:
     # region SAVE
     @staticmethod
     def save(id, name, family, phone_number, enroll_date, class_name, level, teacher):
-        valid, message = EnrollController.is_valid_enroll(
-            name, family, phone_number, enroll_date, class_name, level, teacher
-        )
+        valid, message = EnrollController.is_valid_enroll(name, family, phone_number, enroll_date, level, teacher)
 
         if not valid:
             return False, message
