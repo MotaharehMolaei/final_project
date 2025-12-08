@@ -111,11 +111,11 @@ class_name = StringVar()
 level = StringVar()
 teacher = StringVar()
 
-Entry(window, textvariable=id).place(x=130, y=20)
-Entry(window, textvariable=name).place(x=130, y=60)
-Entry(window, textvariable=family).place(x=130, y=100)
-Entry(window, textvariable=phone_number).place(x=130, y=140)
-Entry(window, textvariable=enroll_date).place(x=130, y=180)
+Entry(window, textvariable=id, justify='center').place(x=130, y=20)
+Entry(window, textvariable=name, justify='center').place(x=130, y=60)
+Entry(window, textvariable=family, justify='center').place(x=130, y=100)
+Entry(window, textvariable=phone_number, justify='center').place(x=130, y=140)
+Entry(window, textvariable=enroll_date, justify='center').place(x=130, y=180)
 
 ttk.Combobox(window, textvariable=class_name,
              values=("English", "German", "Korean", "French", "Italian", "Chinese")).place(x=130, y=220)
@@ -123,7 +123,7 @@ ttk.Combobox(window, textvariable=class_name,
 ttk.Combobox(window, textvariable=level,
              values=("A1", "A2", "B1", "B2", "C1", "C2")).place(x=130, y=260)
 
-Entry(window, textvariable=teacher).place(x=130, y=300)
+Entry(window, textvariable=teacher, justify='center').place(x=130, y=300)
 
 Button(window, text="Save", width=18, command=save_click).place(x=50, y=350)
 Button(window, text="Edit", width=18, command=edit_click).place(x=50, y=380)
