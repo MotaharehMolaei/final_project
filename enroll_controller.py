@@ -6,7 +6,7 @@ from datetime import datetime
 
 class EnrollController:
 
-#region name, family, phone number, enroll date, level and teacher VALIDATION
+    #region name, family, phone number, enroll date, level and teacher VALIDATION
     @staticmethod
     def is_valid_enroll(name, family, phone_number, enroll_date, level, teacher):
 
@@ -36,9 +36,9 @@ class EnrollController:
             return False, "Invalid Teacher Name"
 
         return True, ""
-# endregion
+    # endregion
 
-# region save
+    # region SAVE
     @staticmethod
     def save(id, name, family, phone_number, enroll_date, class_name, level, teacher):
         valid, message = EnrollController.is_valid_enroll(
@@ -55,9 +55,9 @@ class EnrollController:
             return True, "Enrollment saved successfully"
         except Exception as e:
             return False, f"Failed to save enrollment: {e}"
-# endregion
+    # endregion
 
-# region edit
+    # region EDIT
     @staticmethod
     def edit(id, name, family, phone_number, enroll_date, class_name, level, teacher):
         valid, message = EnrollController.is_valid_enroll(
@@ -74,9 +74,9 @@ class EnrollController:
             return True, "Enrollment edited successfully"
         except Exception as e:
             return False, f"Failed to edit enrollment: {e}"
-# endregion
+    # endregion
 
-# region remove
+    # region REMOVE
     @staticmethod
     def remove(id):
         try:
@@ -85,9 +85,9 @@ class EnrollController:
             return True, "Enrollment removed successfully"
         except Exception as e:
             return False, f"Failed to remove enrollment: {e}"
-# endregion
+    # endregion
 
-# region find
+    # region FIND
     @staticmethod
     def find_all():
         try:
@@ -96,4 +96,4 @@ class EnrollController:
             return True, enrolls
         except Exception as e:
             return False, f"Failed to find enrollments: {e}"
-# endregion
+    # endregion
