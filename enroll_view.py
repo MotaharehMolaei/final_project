@@ -87,7 +87,7 @@ def remove_click():
         messagebox.showerror("Error", message)
 
 
-# ---------------- GUI, Label, Entry, Button and Table in seperate region--------------------
+# ---------------- GUI, Label, Entry, Button and Table in seperate regions--------------------
 # region GUI
 window = Tk()
 window.geometry("1200x450")
