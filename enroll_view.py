@@ -25,7 +25,7 @@ def reset():
     else:
         messagebox.showerror("Error", enroll_list)
 
-
+# region select enroll
 def select_enroll(event):
     enroll = table.item(table.focus())["values"]
     if enroll:
@@ -37,8 +37,9 @@ def select_enroll(event):
         class_name.set(enroll[5])
         level.set(enroll[6])
         teacher.set(enroll[7])
+# endregion
 
-
+# region save click
 def save_click():
     status, message = EnrollController.save(
         id.get(),
@@ -56,8 +57,9 @@ def save_click():
         messagebox.showinfo("Save", "Enrollment saved successfully")
     else:
         messagebox.showerror("Error", message)
+# endregion
 
-
+# region edit click
 def edit_click():
     status, message = EnrollController.edit(
         id.get(),
@@ -75,8 +77,9 @@ def edit_click():
         messagebox.showinfo("Edit", "Enrollment edited successfully")
     else:
         messagebox.showerror("Error", message)
+# endregion
 
-
+# region remove click
 def remove_click():
     status, message = EnrollController.remove(id.get())
 
@@ -85,9 +88,9 @@ def remove_click():
         messagebox.showinfo("Remove", "Enrollment removed successfully")
     else:
         messagebox.showerror("Error", message)
+# endregion
 
-
-# ---------------- GUI, Label, Entry, Button and Table in seperate regions--------------------
+# ---------------- in GUI Region there are separete regions for Label, Entry, Button and Table -------------------
 # region GUI
 window = Tk()
 window.geometry("1200x450")
