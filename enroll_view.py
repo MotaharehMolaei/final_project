@@ -87,12 +87,13 @@ def remove_click():
         messagebox.showerror("Error", message)
 
 
-# ---------------- GUI --------------------
-
+# ---------------- GUI, Label, Entry, Button and Table in seperate region--------------------
+# region GUI
 window = Tk()
 window.geometry("1200x450")
 window.title("Enrollment Management")
 
+# region labels
 Label(window, text="ID").place(x=20, y=20)
 Label(window, text="Name").place(x=20, y=60)
 Label(window, text="Family").place(x=20, y=100)
@@ -101,7 +102,9 @@ Label(window, text="Enroll Date\n YYYY-MM-DD").place(x=20, y=180)
 Label(window, text="Class").place(x=20, y=220)
 Label(window, text="Level").place(x=20, y=260)
 Label(window, text="Teacher").place(x=20, y=300)
+# endregion
 
+# region Variables
 id = IntVar()
 name = StringVar()
 family = StringVar()
@@ -110,7 +113,9 @@ enroll_date = StringVar()
 class_name = StringVar()
 level = StringVar()
 teacher = StringVar()
+# endregion
 
+# region Entry
 Entry(window, textvariable=id).place(x=130, y=20)
 Entry(window, textvariable=name).place(x=130, y=60)
 Entry(window, textvariable=family).place(x=130, y=100)
@@ -124,11 +129,15 @@ ttk.Combobox(window, textvariable=level,
              values=("A1", "A2", "B1", "B2", "C1", "C2")).place(x=130, y=260)
 
 Entry(window, textvariable=teacher).place(x=130, y=300)
+# endregion
 
+# region Buttons
 Button(window, text="Save", width=18, command=save_click).place(x=50, y=350)
 Button(window, text="Edit", width=18, command=edit_click).place(x=50, y=380)
 Button(window, text="Remove", width=18, command=remove_click).place(x=50, y=410)
+# endregion
 
+# region table
 table = ttk.Treeview(
     window,
     height=21,
@@ -156,6 +165,8 @@ table.heading("Teacher", text="Teacher")
 
 table.place(x=350, y=20)
 table.bind("<<TreeviewSelect>>", select_enroll)
+# endregion
 
 reset()
 window.mainloop()
+# endregion
