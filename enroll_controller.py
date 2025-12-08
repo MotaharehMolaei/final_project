@@ -11,29 +11,29 @@ class EnrollController:
     def is_valid_enroll(name, family, phone_number, enroll_date, level, teacher):
 
         if not re.match(r"^[a-zA-Z\s]{3,30}$", name):
-            return False, "Invalid Name"
+            raise NameError("Invalid Name")
 
         if not re.match(r"^[a-zA-Z\s]{3,30}$", family):
-            return False, "Invalid Family Name"
+            raise NameError("Invalid Family Name")
 
         if not re.match(r"^09\d{9}$", phone_number):
-            return False, "Invalid Phone Number"
+            raise NameError("Invalid Phone Number")
 
         try:
             date_obj = datetime.strptime(enroll_date, "%Y-%m-%d")
         except ValueError:
-            return False, "Invalid Enroll Date (YYYY-MM-DD)"
+            raise NameError("Invalid Enroll Date (YYYY-MM-DD)")
 
 
         today = datetime.now().date()
         if date_obj.date() < today:
-            return False, "Enroll Date cannot be in the past"
+            raise NameError("Enroll Date cannot be in the past")
 
         if level not in ["A1", "A2", "B1", "B2", "C1", "C2"]:
-            return False, "Invalid Level"
+           raise NameError("Invalid Level")
 
         if not re.match(r"^[a-zA-Z\s]{3,60}$", teacher):
-            return False, "Invalid Teacher Name"
+            raise NameError("Invalid Teacher Name")
 
         return True, ""
     # endregion
