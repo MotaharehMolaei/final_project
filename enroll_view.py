@@ -148,14 +148,14 @@ table = ttk.Treeview(
     show="headings"
 )
 
-table.column("ID", width=50)
-table.column("Name", width=120)
-table.column("Family", width=120)
-table.column("Phone Number", width=140)
-table.column("Enroll Date", width=120)
-table.column("Class", width=100)
-table.column("Level", width=60)
-table.column("Teacher", width=120)
+table.column("ID", width=50, anchor=CENTER)
+table.column("Name", width=120, anchor=CENTER)
+table.column("Family", width=120, anchor=CENTER)
+table.column("Phone Number", width=140, anchor=CENTER)
+table.column("Enroll Date", width=120, anchor=CENTER)
+table.column("Class", width=100, anchor=CENTER)
+table.column("Level", width=60, anchor=CENTER)
+table.column("Teacher", width=120, anchor=CENTER)
 
 table.heading("ID", text="ID")
 table.heading("Name", text="Name")
