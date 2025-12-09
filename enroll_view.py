@@ -25,6 +25,7 @@ def reset():
     else:
         messagebox.showerror("Error", enroll_list)
 
+
 # region select enroll
 def select_enroll(event):
     enroll = table.item(table.focus())["values"]
