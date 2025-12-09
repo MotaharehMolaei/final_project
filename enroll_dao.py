@@ -20,6 +20,8 @@ with sqlite3.connect("enroll_db") as connection:
     connection.commit()
 
 print("Database and table created successfully.")
+
+
 class EnrollDataAccess:
 
     def save(self, enroll):
